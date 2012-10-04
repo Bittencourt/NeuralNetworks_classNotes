@@ -1,0 +1,248 @@
+%%This is a very basic article template.
+%%There is just one section and two subsections.
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{tikz}
+%\usetikzlibrary{shapes,arrows}
+\let\stdsection\section \renewcommand\section{\newpage\stdsection}  
+
+\usepackage{pst-all}
+\usepackage{multido}
+\usepackage{tikz}
+\usetikzlibrary{scopes,matrix,positioning}
+\tikzset{
+  mymx/.style={matrix of math nodes,nodes=myball,column sep=4em,row sep=-1ex},
+  myball/.style={draw,circle,inner sep=0pt},
+  mylabel/.style={midway,sloped,fill=white,inner sep=1pt,outer sep=1pt,below,
+    execute at begin node={$\scriptstyle},execute at end node={$}},
+  plain/.style={draw=none,fill=none},
+  sel/.append style={fill=green!10},
+  prevsel/.append style={fill=red!10},
+  route/.style={-latex,thick},
+  selroute/.style={route,blue!50!green}
+}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+
+
+% Upper part of the page
+%\includegraphics[width=0.15\textwidth]{./logo}\\[1cm]    
+
+\textsc{\LARGE PEE - COPPE}\\[1.5cm]
+
+\textsc{\Large Notas de Aula}\\[0.5cm]
+
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries CPE722 - Redes Neurais não Supervisionadas e
+Clusterização\\ 2012.3}\\[0.4cm]
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autor:}\\
+Pedro Bittencourt
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professor:} \\
+L.P. Calôba
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+
+\section{Programa}
+
+\subsection{Parte I - Complemento de Redes Feedfoward supervisionadas}
+
+\begin{itemize}
+  \item Poda 
+  \item Outras redes feedfoward 
+  \item RNs e séries temporais
+  \item RNs em PCAs generalizadas
+\end{itemize}
+
+\subsection{Parte IIa - Agrupamentos(Clusterização)}
+
+
+\begin{itemize}
+  \item Introdução e Motivação ao Uso
+  \item Classificadores e Classificação por Similaridade
+  \item Aprendizado Supervisionado e Não Supervisionado
+  \item Clusterização e propriedades das classes
+  \item Pré-processamento
+  \item Geração de padrões e classificação
+  \item Clusterização, processos clássicos
+\end{itemize}
+
+
+\subsection{Parte IIb - Redes Neurais com treinamento não supervisionado}
+
+\begin{itemize}
+  \item Redes Neurais em Clusterização
+  \item Quantização Vetorial
+  \item Camada de Kohonen Simplificada
+  \item Rede ART
+  \item Counterpropagation
+  \item Classes não esféricas
+  \item SOM
+  \item Demonstrativos e exemplos
+\end{itemize}
+
+\section{Referências bibliográficas do curso}
+
+\subsection{Livros}
+
+\begin{itemize}
+ \item  Wasserman, P. - 'Neural Computing', Van Nostrand Reinhold, 1989, Cap 4,
+ 8.
+\item Ivan Silva, I.; Spatti, D. e Flauzini, R. - 'Redes Neurais Artificiais para 
+Engenharia e Ciências Aplicadas', Artliber, 2010, cap 8-10.
+\item Duda, R.O., Hart, P.E., 'Pattern Classification and Scene Anal.', Wiley,
+1973,Cap 6.
+\item Haykin, S., 'Neural Networks and Learning machines', Pearson, 2009 ou 'Redes 
+Neurais, Teoria e Prática', Bookman, 2001, Cap. 8.1, 8.2, Cap. 9.  
+\item Duda, R.O.; Hart, P.E.; Stork, D.G., 'Pattern Classification', Wiley, 2001, Cap 10. 
+\item Gersho, A., Gray, R.M. - 'Vector Quantization and Signal Compression',
+Kluwer, 1992, Part III.
+\end{itemize}
+
+\subsection{Software}
+\begin{itemize}
+  \item Neuralworks, Neuroshell
+  \item Toolboxes: Matlab, Statistica
+  \item SNNS (Stuttgart Neural Network Simulator)
+  \item WEKA (Waikato Environment for Knowledge Analysis)
+\end{itemize}
+
+\section{Aula 1 - Revisão de Redes Neurais Supervisionadas}
+Esta sessão cobre algumas estruturas de Redes Neurais com treinamento
+supervisionado e algoritmos estruturais.
+
+\subsection{Algoritmo Destrutivo - Poda ou \textit{Prunning}}
+O algoritmo de poda reduz a estrutura da rede reduzindo suas sinapses e/ou
+neurônios. Este algoritmo apresenda certas vantagens:
+\begin{itemize}
+  \item Para aplicações em tempo real uma rede mais simpls é vantanjosa para
+  reduzir a quantidade de operações e velocidade de execução.
+  \item Com a poda é possível extrair a lógica da rede
+\end{itemize}
+\begin{tikzpicture}
+  \matrix[mymx] (mx) {
+    |[plain]| x_1 &|[prevsel,yshift=4ex]| f(e) & f_4(e) \\
+    \:&|[prevsel]| f(e) && y &|[plain]| y \\
+    |[plain]| x_n &|[sel,yshift=-4ex]| f(e) & f_5(e) \\
+  };
+  {[route]
+    \foreach \y in {1,3} {
+      \draw (mx-\y-1) -- (mx-1-2);
+      \draw (mx-\y-1) -- (mx-2-2);
+      \draw (mx-\y-3) -- (mx-2-4); }
+    \foreach \y in {1,2,3} {
+      \draw (mx-\y-2) -- (mx-1-3);
+      \draw (mx-\y-2) -- (mx-3-3); }
+    \draw (mx-2-4) -- (mx-2-5);
+  }
+  {[selroute]
+    \draw (mx-1-1) -- (mx-3-2) node[mylabel] { W_{1,3} };
+    \draw (mx-3-1) -- (mx-3-2) node[mylabel] { W_{n,3} };
+  }
+  \node[above right=of mx.center] {$ y_3 = f_3(w_{(x1)3}x_1 + w_{(x2)3} x_2) $};
+\end{tikzpicture}
+\subsection{Algoritmos Construtivos}
+\subsubsection{SONN: Self Organizes Neural Network}
+\subsubsection{Classificador Tilling}
+\subsubsection{Classificador Hierárquico}
+\subsubsection{Rede de Perceptrons}
+\section{Aula 2 - PCA generalizado com Redes Neurais}
+
+\begin{tikzpicture}
+  \matrix[mymx] (mx) {
+    &|[prevsel]| f_1(e) \\
+    |[plain]| x_1 && f_4(e) \\
+    &|[sel]| f_2(e) && f_6(e) & |[plain]| y \\
+    |[plain]| x_2 && f_5(e) \\
+    & f_3(e) \\
+  };
+  {[route]
+    \foreach \y in {2,4} {
+      \draw (mx-\y-1) -- (mx-1-2);
+      \draw (mx-\y-1) -- (mx-5-2);
+      \draw (mx-\y-3) -- (mx-3-4); }
+    \foreach \y in {1,3,5} {
+      \draw (mx-\y-2) -- (mx-2-3);
+      \draw (mx-\y-2) -- (mx-4-3); }
+    \draw (mx-3-4) -- (mx-3-5);
+  }
+  {[selroute]
+    \draw (mx-2-1) -- (mx-3-2) node[mylabel,above] { W_{(x1)2} };
+    \draw (mx-4-1) -- (mx-3-2) node[mylabel] { W_{(x2)2} };
+  }
+  \node[above right=of mx.center]  {$ y_2 = f_2 (w_{(x1)2} x_1 + w_{(x2)2} x_2) $};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  \matrix[mymx] (mx) {
+    |[plain]| x_1 &|[prevsel,yshift=4ex]| f_1(e) & f_4(e) \\
+    &|[prevsel]| f_2(e) && f_6(e) &|[plain]| y \\
+    |[plain]| x_2 &|[sel,yshift=-4ex]| f_3(e) & f_5(e) \\
+  };
+  {[route]
+    \foreach \y in {1,3} {
+      \draw (mx-\y-1) -- (mx-1-2);
+      \draw (mx-\y-1) -- (mx-2-2);
+      \draw (mx-\y-3) -- (mx-2-4); }
+    \foreach \y in {1,2,3} {
+      \draw (mx-\y-2) -- (mx-1-3);
+      \draw (mx-\y-2) -- (mx-3-3); }
+    \draw (mx-2-4) -- (mx-2-5);
+  }
+  {[selroute]
+    \draw (mx-1-1) -- (mx-3-2) node[mylabel] { W_{(x1)3} };
+    \draw (mx-3-1) -- (mx-3-2) node[mylabel] { W_{(x2)3} };
+  }
+  \node[above right=of mx.center] {$ y_3 = f_3(w_{(x1)3}x_1 + w_{(x2)3} x_2) $};
+\end{tikzpicture}
+
+\psset{arrowscale=4}
+\def\pscolhookiii{\global\pscolsep=0.5cm}
+\def\pscolhookiv{\global\pscolsep=2cm}
+\begin{psmatrix}[colsep=2,rowsep=2,mnode=circle]
+  [name=N11] N11 & [name=N12] N12 & [name=N13] N13 & [name=N14] N14 \\[0pt]
+  [name=N21] N21 & [name=N22] N22 & [name=N23] N23 & [name=N24] N24 \\[2cm]
+  [name=N31] N31 & [name=N32] N32 & [name=N33] N33 & [name=N34] N34
+\end{psmatrix}
+% Node connections
+\ncline[ArrowInside=->,ArrowInsideNo=5,%
+	linecolor=red]{N11}{N33}
+\ncline[ArrowInside=-|,ArrowInsidePos=0.75,%
+	linecolor=blue]{<->}{N23}{N34}
+\nccurve[angleB=90,ArrowInside={-]},ArrowInsidePos=0.6666,%
+	linecolor=cyan]{N13}{N14}
+\nccurve[angle=-90,ArrowInside=->,ArrowInsidePos=0.5,%
+	linecolor=green]{N31}{N33}
+\nccurve[angleA=90,angleB=180,ArrowInside=->,ArrowInsidePos=0.4,%
+	linecolor=gray]{N31}{N24}
+\end{document}
