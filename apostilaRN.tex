@@ -80,8 +80,9 @@ L.P. Calôba
 \begin{itemize}
   \item Poda 
   \item Outras redes feedfoward 
-  \item RNs e séries temporais
   \item RNs em PCAs generalizadas
+  \item RNs e séries temporais
+
 \end{itemize}
 
 \subsection{Parte IIa - Agrupamentos(Clusterização)}
@@ -137,7 +138,7 @@ Kluwer, 1992, Part III.
   \item WEKA (Waikato Environment for Knowledge Analysis)
 \end{itemize}
 
-\section{Aula 1 - Revisão de Redes Neurais Supervisionadas}
+\section{Revisão de Redes Neurais Supervisionadas}
 Esta sessão cobre algumas estruturas de Redes Neurais com treinamento
 supervisionado e algoritmos estruturais.
 
@@ -151,33 +152,36 @@ neurônios. Este algoritmo apresenda certas vantagens:
 \end{itemize}
 \begin{tikzpicture}
   \matrix[mymx] (mx) {
-    |[plain]| x_1 &|[prevsel,yshift=4ex]| f(e) & f_4(e) \\
-    \:&|[prevsel]| f(e) && y &|[plain]| y \\
-    |[plain]| x_n &|[sel,yshift=-4ex]| f(e) & f_5(e) \\
+    |[plain]| x_1 &   |[prevsel,yshift=4ex]| \phi(.) & \phi(.)) &
+    |[plain]|y_1\\
+    \:&     |[prevsel]| \phi(.) &&     \\
+    |[plain]| x_n &   |[sel,yshift=-4ex]   | \phi(.) & \phi(.) & |[plain]|y_n
+    \\
   };
   {[route]
     \foreach \y in {1,3} {
       \draw (mx-\y-1) -- (mx-1-2);
       \draw (mx-\y-1) -- (mx-2-2);
-      \draw (mx-\y-3) -- (mx-2-4); }
+       }
     \foreach \y in {1,2,3} {
       \draw (mx-\y-2) -- (mx-1-3);
       \draw (mx-\y-2) -- (mx-3-3); }
-    \draw (mx-2-4) -- (mx-2-5);
+    \draw (mx-1-3) -- (mx-1-4);
+    \draw (mx-3-3) -- (mx-3-4);
   }
   {[selroute]
     \draw (mx-1-1) -- (mx-3-2) node[mylabel] { W_{1,3} };
     \draw (mx-3-1) -- (mx-3-2) node[mylabel] { W_{n,3} };
   }
-  \node[above right=of mx.center] {$ y_3 = f_3(w_{(x1)3}x_1 + w_{(x2)3} x_2) $};
+
 \end{tikzpicture}
 \subsection{Algoritmos Construtivos}
 \subsubsection{SONN: Self Organizes Neural Network}
 \subsubsection{Classificador Tilling}
 \subsubsection{Classificador Hierárquico}
 \subsubsection{Rede de Perceptrons}
-\section{Aula 2 - PCA generalizado com Redes Neurais}
-
+\section{PCA generalizado com Redes Neurais}
+\section{Séries Temporais e Redes Neurais}
 \begin{tikzpicture}
   \matrix[mymx] (mx) {
     &|[prevsel]| f_1(e) \\

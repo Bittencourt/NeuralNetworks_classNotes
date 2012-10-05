@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=latex 2012.10.2)  4 OCT 2012 02:30
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=latex 2012.10.2)  5 OCT 2012 01:53
 entering extended mode
 **apostilaRN.tex
 (C:\Users\Pedro\workspace\RedesNeurais-COPPE\apostilaRN.tex
@@ -620,14 +620,14 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
  [1] [2] [3]
-[4] (C:\Users\Pedro\workspace\RedesNeurais-COPPE\apostilaRN.aux) ) 
+[4] [5] (C:\Users\Pedro\workspace\RedesNeurais-COPPE\apostilaRN.aux) ) 
 Here is how much of TeX's memory you used:
- 13273 strings out of 494020
- 244576 string characters out of 3143905
- 373712 words of memory out of 3000000
- 16273 multiletter control sequences out of 15000+200000
+ 13280 strings out of 494020
+ 244714 string characters out of 3143905
+ 373807 words of memory out of 3000000
+ 16280 multiletter control sequences out of 15000+200000
  13218 words of font info for 27 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  56i,13n,79p,592b,784s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on apostilaRN.dvi (5 pages, 70040 bytes).
+Output written on apostilaRN.dvi (6 pages, 69288 bytes).
